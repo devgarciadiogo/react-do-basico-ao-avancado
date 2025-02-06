@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 
 import Img2 from "./assets/img2.jpg";
 import CondicionalRender from "./components/CondicionalRender";
@@ -8,6 +9,9 @@ import ShowUserName from "./components/ShowUserName";
 import CarDetails from "./components/CarDetails";
 import Fragments from "./components/Fragments";
 import Container from "./components/Container";
+import ExecuteFunction from "./components/ExecuteFunction";
+import Message from "./components/Message";
+import ChangeMessageState from "./components/ChangeMessageState";
 
 function App() {
   const cars = [
@@ -15,6 +19,16 @@ function App() {
     { id: 2, brand: "Kia", color: "Branco", newCar: false, km: 34343 },
     { id: 3, brand: "Renault", color: "Azul", newCar: false, km: 2344 },
   ];
+
+  function showMessage() {
+    console.log("Evento de componente pai!");
+  }
+
+  const [message, setMessage] = useState("");
+
+  const handleMessage = (msg) => {
+    setMessage(msg);
+  };
 
   return (
     <>
@@ -51,11 +65,16 @@ function App() {
           />
         ))}
         {/* fragment */}
-        <Fragments propFragment="teste"/>
+        <Fragments propFragment="teste" />
         {/* children */}
         <Container myValue="testing">
           <p>Esté é o conteudo!</p>
         </Container>
+        {/* executar função */}
+        <ExecuteFunction myFunction={showMessage} />
+        {/* state lift */}
+        <Message msg={message} />
+        <ChangeMessageState handleMessage={handleMessage} />
       </div>
     </>
   );
