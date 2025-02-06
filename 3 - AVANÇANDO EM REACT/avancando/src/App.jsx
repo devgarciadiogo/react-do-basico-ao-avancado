@@ -6,6 +6,8 @@ import ListRender from "./components/ListRender";
 import ManageData from "./components/ManageData";
 import ShowUserName from "./components/ShowUserName";
 import CarDetails from "./components/CarDetails";
+import Fragments from "./components/Fragments";
+import Container from "./components/Container";
 
 function App() {
   const cars = [
@@ -48,6 +50,12 @@ function App() {
             newCar={car.newCar}
           />
         ))}
+        {/* fragment */}
+        <Fragments propFragment="teste"/>
+        {/* children */}
+        <Container myValue="testing">
+          <p>Esté é o conteudo!</p>
+        </Container>
       </div>
     </>
   );
