@@ -7,9 +7,9 @@ const MyForm = ({ user = {} }) => {
   //3 -  gerenciamento de dados
   const [name, setName] = useState(user ? user.name : "");
   const [email, setEmail] = useState(user ? user.email : "");
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState(user ? user.bio : "");
+  const [role, setRole] = useState(user ? user.role : "");
 
-  // Evita que o log fique repetindo a cada renderização
   useEffect(() => {
     console.log("User recebido", user);
   }, [user]);
@@ -24,7 +24,7 @@ const MyForm = ({ user = {} }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Enviando o formulário");
-    console.log(name, email, bio);
+    console.log(name, email, bio, role);
 
     //validacao
     //envio
@@ -71,6 +71,19 @@ const MyForm = ({ user = {} }) => {
             onChange={(e) => setBio(e.target.value)}
             value={bio}
           ></textarea>
+        </label>
+        {/* 9 - select */}
+        <label>
+          <span>Função no sistema</span>
+          <select
+            name="role"
+            onChange={(e) => setRole(e.target.value)}
+            value={role}
+          >
+            <option value="user">Usuário</option>
+            <option value="editor">Editor</option>
+            <option value="admin">Administrador</option>
+          </select>
         </label>
         <input type="submit" value="Enviar" />
       </form>
