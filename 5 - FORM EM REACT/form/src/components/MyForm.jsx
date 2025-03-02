@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./MyForm.css";
 import PropTypes from "prop-types";
 
@@ -7,8 +7,12 @@ const MyForm = ({ user = {} }) => {
   //3 -  gerenciamento de dados
   const [name, setName] = useState(user ? user.name : "");
   const [email, setEmail] = useState(user ? user.email : "");
+  const [bio, setBio] = useState("");
 
-  console.log("User recebido", user);
+  // Evita que o log fique repetindo a cada renderização
+  useEffect(() => {
+    console.log("User recebido", user);
+  }, [user]);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -20,12 +24,16 @@ const MyForm = ({ user = {} }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Enviando o formulário");
-    console.log(name, email);
-  };
+    console.log(name, email, bio);
 
-  //7 -  limpar formulário
-  setName("");
-  setEmail("");
+    //validacao
+    //envio
+
+    //7 -  limpar formulário
+    setName("");
+    setEmail("");
+    setBio("");
+  };
 
   return (
     <div>
@@ -53,6 +61,16 @@ const MyForm = ({ user = {} }) => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
+        </label>
+        {/* 8 - textarea */}
+        <label>
+          <span>Bio:</span>
+          <textarea
+            name="bio"
+            placeholder="Descrição do usuário"
+            onChange={(e) => setBio(e.target.value)}
+            value={bio}
+          ></textarea>
         </label>
         <input type="submit" value="Enviar" />
       </form>
